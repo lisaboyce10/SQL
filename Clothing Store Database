@@ -1,0 +1,32 @@
+--Create a clothing store database
+
+CREATE TABLE store (id integer primary key, name text, price integer, color text, size text);
+
+INSERT INTO store VALUES (1, "hat", 10, "black", "one size");
+INSERT INTO store VALUES (2, "sunglasses", 10, "black", "one size");
+INSERT INTO store VALUES (3, "socks", 2, "white", "one size");
+INSERT INTO store VALUES (4, "necklace", 15, "purple", "one size");
+INSERT INTO store VALUES (5, "earrings", 5, "gray", "one size");
+INSERT INTO store VALUES (6, "bracelet", 5, "multi", "one size");
+INSERT INTO store VALUES (7, "shorts", 15, "yellow", "medium");
+INSERT INTO store VALUES (8, "shorts", 15, "red", "large");
+INSERT INTO store VALUES (9, "shirt", 15, "white", "large");
+INSERT INTO store VALUES (10, "shirt", 15, "black", "medium");
+INSERT INTO store VALUES (11, "shirt", 15, "red", "small");
+INSERT INTO store VALUES (12, "shirt", 15, "green", "medium");
+INSERT INTO store VALUES (13, "pants", 20, "gray", "large");
+INSERT INTO store VALUES (14, "pants", 20, "pink", "small");
+INSERT INTO store VALUES (15, "pants", 20, "blue", "medium");
+
+--Order the items by price 
+
+SELECT *
+FROM store
+ORDER BY price desc;
+
+--What is the average price of the "one size" items?
+
+SELECT
+AVG(price)
+FROM store
+WHERE size="one size";
