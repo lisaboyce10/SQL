@@ -1,0 +1,70 @@
+-- Create a table of movie stars, the movie title, and the actor's sex.
+
+CREATE TABLE movie_stars (id INTEGER PRIMARY KEY, actor_name TEXT, movie TEXT, sex TEXT);
+
+INSERT INTO movie_stars VALUES (1, "Gregory Peck", "To Kill a Mockingbird", "m");
+INSERT INTO movie_stars VALUES (2, "Marlon Brando", "The Godfather", "m");
+INSERT INTO movie_stars VALUES (3, "Saoirse Ronan", "Little Women", "f");
+INSERT INTO movie_stars VALUES (4, "Judy Garland", "The Wizard of Oz", "f");
+INSERT INTO movie_stars VALUES (5, "Keira Knightley", "Pride & Prejudice", "f");
+INSERT INTO movie_stars VALUES (6, "Tom Hanks", "Forrest Gump", "m");
+INSERT INTO movie_stars VALUES (7, "Cary Elwes", "The Princess Bride", "m");
+INSERT INTO movie_stars VALUES (8, "Anne Hathaway", "The Devil Wears Prada", "f");
+INSERT INTO movie_stars VALUES (9, "Brad Pitt", "Fight Club", "m");
+INSERT INTO movie_stars VALUES (10, "Mel Gibson", "Hamlet", "m");
+
+-- Create a table of authors, their book title, and the author's sex.
+
+CREATE TABLE authors (id INTEGER PRIMARY KEY, author_name TEXT, book TEXT, sex TEXT);
+
+INSERT INTO authors (author_name, book, sex) VALUES ("Harper Lee", "To Kill a Mockingbird", "f");
+INSERT INTO authors (author_name, book, sex) VALUES ("Mario Puzo", "The Godfather", "m");
+INSERT INTO authors (author_name, book, sex) VALUES ("Louisa May Alcott", "Little Women", "f");
+INSERT INTO authors (author_name, book, sex) VALUES ("L. Frank Baum", "The Wizard of Oz", "m");
+INSERT INTO authors (author_name, book, sex) VALUES ("Jane Austen", "Pride & Prejudice", "f");
+INSERT INTO authors (author_name, book, sex) VALUES ("Winston Groom", "Forrest Gump", "m");
+INSERT INTO authors (author_name, book, sex) VALUES ("William Goldman", "The Princess Bride", "m");
+INSERT INTO authors (author_name, book, sex) VALUES ("Lauren Weisberger", "The Devil Wears Prada", "f");
+INSERT INTO authors (author_name, book, sex) VALUES ("Chuck Palahniuk", "Fight Club", "m");
+INSERT INTO authors (author_name, book, sex) VALUES ("William Shakespeare", "Hamlet","m");
+
+-- Create a table of fictional characters, and the book they originate from
+
+CREATE TABLE characters (id INTEGER PRIMARY KEY, character_name TEXT, book TEXT);
+
+INSERT INTO characters (character_name, book) VALUES ("Atticus Finch", "To Kill a Mockingbird");
+INSERT INTO characters (character_name, book) VALUES ("Vito Corleone", "The Godfather");
+INSERT INTO characters (character_name, book) VALUES ("Vito Corleone", "Little Women");
+INSERT INTO characters (character_name, book) VALUES ("Dorothy Gale", "The Wizard of Oz");
+INSERT INTO characters (character_name, book) VALUES ("Elizabeth Bennet", "Pride & Prejudice");
+INSERT INTO characters (character_name, book) VALUES ("Forrest Gump", "Forrest Gump");
+INSERT INTO characters (character_name, book) VALUES ("Westley", "The Princess Bride");
+INSERT INTO characters (character_name, book) VALUES ("Andy Sachs", "The Devil Wears Prada");
+INSERT INTO characters (character_name, book) VALUES ("Tyler Durden", "Fight Club");
+INSERT INTO characters (character_name, book) VALUES ("Prince Hamlet", "Hamlet");
+
+--Join the three tables and display the actor's name, character's name, author's name, movie title, and book title associated with each.
+
+SELECT m.actor_name, c.character_name, a.author_name, m.movie as movie_title, c.book as book_title
+FROM movie_stars m
+JOIN authors a
+ON m.id = a.id
+JOIN characters c
+ON m.id=c.id;
+
+--Join the movie_stars and authors tables and find which entries had both a female movie star and a female author? 
+
+SELECT 
+actor_name, author_name, movie
+FROM movie_stars m
+INNER JOIN authors a
+ON m.id=a.id
+WHERE m.sex = "f" AND a.sex = "f";
+
+-- Join the characters and movie_stars tables and find the fictional character name, the actor who played them, and the book the character originates from.
+
+SELECT
+character_name, actor_name, book
+FROM characters c
+JOIN movie_stars m
+ON c.book = m.movie;
