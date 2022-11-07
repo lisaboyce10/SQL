@@ -1,0 +1,53 @@
+-- Example query (PostgreSQL dialect)
+-- Database and tables from https://bit.io/CharlotteChaze/BreakIntoTech
+-- Code is original to answer predefined questions
+
+--Create a JOIN to combine the tables
+
+SELECT
+people.show_id,
+people.director,
+titles.title,
+titles.type
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" people
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+ON people.show_id = titles.show_id;
+
+--How many movie titles are there in the database? (movies only, not tv shows) 
+
+SELECT
+COUNT(*)
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type='Movie';
+
+--When was the most recent batch of tv shows and/or movies added to the database? 
+
+SELECT 
+max(date(date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+--List all the movies and tv shows in alphabetical order. 
+
+SELECT
+title
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ORDER BY title asc;
+
+--Who was the Director for the movie Bright Star? 
+
+SELECT
+director
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" people
+JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+ON people.show_id = titles.show_id
+WHERE title='Bright Star';
+
+--What is the oldest movie in the database and what year was it made? LIMIT was set to 5 to ensure there were not multiple movies released that year. (There were 2)
+
+SELECT
+title, 
+release_year
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type='Movie'
+ORDER BY release_year asc
+LIMIT 5;
