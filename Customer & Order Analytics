@@ -34,6 +34,15 @@ SUM(Quantity)* price AS Revenue
 FROM BIT_DB.JanSales
 GROUP BY Product
 
+--List all the products sold in Los Angeles in February, and include how many of each were sold. 
+
+SELECT
+Product,
+SUM(Quantity)
+FROM BIT_DB.FebSales Feb
+WHERE location like '%Los Angeles%'
+GROUP BY Product
+
 --Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 SELECT
 Product,
