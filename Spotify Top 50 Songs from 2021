@@ -1,0 +1,18 @@
+--Dataset found from https://www.kaggle.com/datasets/equinxx/spotify-top-50-songs-in-2021?resource=download. Questions and queries created by me.
+
+--What is the average length of song rounded to 2 decimal places?
+SELECT
+Round(AVG(duration_ms)/60000,2) AS Length_Min
+FROM
+BIT_DB.Spotifydata
+
+--What is the dancability of the top 5 most popular songs? Include track name and artist.
+SELECT
+artist_name as artist,
+track_name as track,
+danceability,
+popularity
+FROM
+BIT_DB.Spotifydata
+ORDER BY popularity DESC
+LIMIT 5
