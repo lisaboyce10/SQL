@@ -20,6 +20,7 @@ ORDER BY popularity DESC
 LIMIT 5
 
 --Which artists appear on this list more than once?
+
 SELECT
 artist_name as artist,
 count(*) as appearances
@@ -30,9 +31,16 @@ HAVING appearances>1
 ORDER BY appearances DESC
 
 --What is the maximum danceability? List artist and track.
-Select
+SELECT
 artist_name AS artist,
 track_name AS track,
 max(danceability)
 FROM 
 BIT_DB.Spotifydata
+
+--What percentage of songs were not a 4/4 time signature?
+SELECT
+Count(time_signature)*100/(SELECT count(*) from BIT_DB.Spotifydata) AS Percent_Not_44_Time_Signature
+FROM
+BIT_DB.Spotifydata
+WHERE time_signature <> 4
