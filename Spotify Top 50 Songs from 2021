@@ -1,4 +1,6 @@
---Dataset found from https://www.kaggle.com/datasets/equinxx/spotify-top-50-songs-in-2021?resource=download. Questions and queries created by me.
+--Dataset found from https://www.kaggle.com/datasets/equinxx/spotify-top-50-songs-in-2021?resource=download. 
+--A table was created to enter this data into SQLiteStudio for analysis.
+--Questions and queries created by me to explore the data.
 
 --What is the average length of song rounded to 2 decimal places?
 SELECT
@@ -6,13 +8,31 @@ Round(AVG(duration_ms)/60000,2) AS Length_Min
 FROM
 BIT_DB.Spotifydata
 
---What is the dancability of the top 5 most popular songs? Include track name and artist.
+--What is the tempo of the top 5 most popular songs? Include track name and artist.
 SELECT
 artist_name as artist,
 track_name as track,
-danceability,
+tempo,
 popularity
 FROM
 BIT_DB.Spotifydata
 ORDER BY popularity DESC
 LIMIT 5
+
+--Which artists appear on this list more than once?
+SELECT
+artist_name as artist,
+count(*) as appearances
+FROM 
+BIT_DB.Spotifydata
+GROUP BY artist
+HAVING appearances>1
+ORDER BY appearances DESC
+
+--What is the maximum loudness? List artist and track.
+Select
+artist_name AS artist,
+track_name AS track,
+max(loudness)
+FROM 
+BIT_DB.Spotifydata
