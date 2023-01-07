@@ -29,10 +29,10 @@ GROUP BY artist
 HAVING appearances>1
 ORDER BY appearances DESC
 
---What is the maximum loudness? List artist and track.
+--What is the maximum danceability? List artist and track.
 Select
 artist_name AS artist,
 track_name AS track,
-max(loudness)
+max(danceability)
 FROM 
 BIT_DB.Spotifydata
