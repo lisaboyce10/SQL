@@ -44,3 +44,24 @@ Count(time_signature)*100/(SELECT count(*) from BIT_DB.Spotifydata) AS Percent_N
 FROM
 BIT_DB.Spotifydata
 WHERE time_signature <> 4
+
+--Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, and label them as a “Top Star”.
+--Note: This question was not original, but the query is mine.
+
+WITH popularity_average_CTE AS (
+SELECT
+S.artist_name,
+avg(S.popularity) AS average_popularity
+FROM 
+Spotifydata as S
+GROUP BY
+S.artist_name)
+
+SELECT
+artist_name,
+average_popularity,
+'TOP STAR' AS tag
+FROM
+popularity_average_CTE
+WHERE
+average_popularity >=90
